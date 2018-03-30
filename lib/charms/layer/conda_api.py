@@ -9,7 +9,7 @@ from charmhelpers.fetch.archiveurl import ArchiveUrlFetchHandler
 
 CONDA_HOME = Path('/opt/anaconda')
 CONDA_BIN = CONDA_HOME / 'bin' / 'conda'
-CONDA_PIP_BIN = CONDA_BIN / 'envs' / 'juju' / 'bin' / 'pip'
+CONDA_PIP_BIN = CONDA_HOME / 'envs' / 'juju' / 'bin' / 'pip'
 
 
 def init_install_conda(url, sha, validate):
