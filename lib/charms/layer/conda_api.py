@@ -3,10 +3,8 @@ import shutil
 from subprocess import call
 from pathlib import Path
 
-from charmhelpers.core import hookenv
 from charmhelpers.core.host import chownr
 from charmhelpers.fetch.archiveurl import ArchiveUrlFetchHandler
-from charms.reactive import endpoint_from_flag, when, when_not, set_flag
 
 
 CONDA_HOME = Path('/opt/anaconda')
