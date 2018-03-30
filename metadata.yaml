@@ -1,0 +1,13 @@
+name: conda-api
+summary: Conda API
+maintainer: James Beedy <jamesbeedy@gmail.com>
+description: |
+  Conda API
+tags:
+  - jupyter
+  - spark
+  - data-processing
+  - anaconda
+  - conda
+series:
+- xenial
