@@ -7,6 +7,8 @@ The 'conda-api' exposes a few choice functionalities to charm authors.
 
 Include this layer in your charm, then import `from charms.layer import conda_api` to access the helper functions.
 
+### Install Conda
+
 ```python
 init_install_conda(url, sha, validate)
 ```
@@ -24,6 +26,7 @@ validate = "sha256"
 init_install_conda(conda_install_url, sha256, validate)
 ```
 
+### Create Conda Venv
 ```python
 create_conda_venv(python_version, packages=None)
 ```
@@ -34,6 +37,7 @@ Create conda venv and optionally install packages.
 create_conda_venv('3.5', ['jupyter', 'nb_conda'])
 ```
 
+### Install Conda Pkgs
 ```python
 install_conda_packages(conda_packages)
 ```
@@ -44,6 +48,7 @@ Install conda packages.
 install_conda_packages(['jupyter', 'nb_conda'])
 ```
 
+### Install Conda Pip Pkgs
 ```python
 install_conda_pip_packages(conda_pip_packages)
 ```
@@ -54,8 +59,8 @@ Installs a list of pip packages into your conda environment.
 install_conda_pip_packages(['findspark'])
 ```
 
-### License
+#### License
 * AGPLv3 (see `copyright` file)
 
-### Copyright
+#### Copyright
 * James Beedy (c) 2018 <jamesbeedy@gmail.com>
