@@ -72,4 +72,4 @@ def install_conda_pip_packages(conda_pip_packages):
     conda_install_pip_packages(['findspark'])
     """
     # Install conda pip packages
-    call([str(CONDA_PIP_BIN), 'install', '-y'] + conda_pip_packages)
+    call([str(CONDA_PIP_BIN), 'install'] + conda_pip_packages)
