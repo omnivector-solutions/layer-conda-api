@@ -4,7 +4,7 @@ Conda API
 
 ## Usage
 The 'conda-api' exposes a few choice functionalities to charm authors. You can include this layer
-in your charm, then import `from charms.layer import conda_api' to access the helper functions.
+in your charm, then import `from charms.layer import conda_api` to access the helper functions.
 
 ```python
 init_install_conda()
