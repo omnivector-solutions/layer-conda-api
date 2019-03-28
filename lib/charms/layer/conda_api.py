@@ -3,13 +3,14 @@ import shutil
 from subprocess import call
 from pathlib import Path
 
-from charmhelpers.core.host import chownr
 from charmhelpers.fetch.archiveurl import ArchiveUrlFetchHandler
 
 
-CONDA_HOME = Path('/opt/anaconda')
+CONDA_ENV_NAME = 'jupyter'
+
+CONDA_HOME = Path('/home/ubuntu/anaconda')
 CONDA_BIN = CONDA_HOME / 'bin' / 'conda'
-CONDA_PIP_BIN = CONDA_HOME / 'envs' / 'juju' / 'bin' / 'pip'
+CONDA_PIP_BIN = CONDA_HOME / 'envs' / CONDA_ENV_NAME / 'bin' / 'pip'
 
 
 def init_install_conda(url, sha, validate):
@@ -53,7 +54,7 @@ def create_conda_venv(python_version, packages=None):
     create_conda_venv('jupyter', '3.5', ['jupyter', 'nb_conda'])
     """
     # Create virtualenv and install jupyter
-    create_conda_venv = [str(CONDA_BIN), 'create', '-y', '-n', 'juju',
+    create_conda_venv = [str(CONDA_BIN), 'create', '-y', '-n', CONDA_ENV_NAME,
                          'python={}'.format(python_version)]
     if packages:
         create_conda_venv = create_conda_venv + packages
@@ -68,7 +69,8 @@ def install_conda_packages(conda_packages):
     install_conda_packages(['jupyter', 'nb_conda'])
     """
     # Install conda packages
-    call([str(CONDA_BIN), 'install', '-y'] + conda_packages)
+    call([str(CONDA_BIN), 'install', '-n', CONDA_ENV_NAME, '-y'] +
+         conda_packages)
 
 
 def install_conda_pip_packages(conda_pip_packages):
