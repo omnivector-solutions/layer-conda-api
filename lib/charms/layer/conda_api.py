@@ -6,11 +6,8 @@ from pathlib import Path
 from charmhelpers.fetch.archiveurl import ArchiveUrlFetchHandler
 
 
-CONDA_ENV_NAME = 'jupyter_env'
-
 CONDA_HOME = Path('/home/ubuntu/anaconda3')
 CONDA_BIN = CONDA_HOME / 'bin' / 'conda'
-CONDA_PIP_BIN = CONDA_HOME / 'envs' / CONDA_ENV_NAME / 'bin' / 'pip'
 
 
 def init_install_conda(url, sha, validate):
@@ -46,7 +43,7 @@ def init_install_conda(url, sha, validate):
     call([str(CONDA_BIN), 'update', '-y', '-n', 'base', 'conda'])
 
 
-def create_conda_venv(python_version, packages=None):
+def create_conda_venv(env_name, python_version, packages=None):
     """Create conda venv and optionally install packages.
 
     Example Usage:
@@ -54,14 +51,26 @@ def create_conda_venv(python_version, packages=None):
     create_conda_venv('jupyter', '3.5', ['jupyter', 'nb_conda'])
     """
     # Create virtualenv and install jupyter
-    create_conda_venv = [str(CONDA_BIN), 'create', '-y', '-n', CONDA_ENV_NAME,
+    create_conda_venv = [str(CONDA_BIN), 'create', '-y', '-n', env_name,
                          'python={}'.format(python_version)]
     if packages:
         create_conda_venv = create_conda_venv + packages
     call(create_conda_venv)
 
 
-def install_conda_packages(conda_packages):
+def remove_conda_venv(env_name):
+    """Remove conda venv.
+
+    Example Usage:
+
+    remove_conda_venv('jupyter')
+    """
+    # Remove conda env
+    remove_conda_cmd = [str(CONDA_BIN), 'env', 'remove', '-n', env_name, '-y']
+    call(remove_conda_cmd)
+
+
+def install_conda_packages(env_name, conda_packages):
     """Install conda packages
 
     Example Usage:
@@ -69,16 +78,16 @@ def install_conda_packages(conda_packages):
     install_conda_packages(['jupyter', 'nb_conda'])
     """
     # Install conda packages
-    call([str(CONDA_BIN), 'install', '-n', CONDA_ENV_NAME, '-y'] +
-         conda_packages)
+    call([str(CONDA_BIN), 'install', '-n', env_name, '-y'] + conda_packages)
 
 
-def install_conda_pip_packages(conda_pip_packages):
+def install_conda_pip_packages(env_name, conda_pip_packages):
     """Install conda pip packages
 
     Example Usage:
 
     conda_install_pip_packages(['findspark'])
     """
+    CONDA_PIP_BIN = CONDA_HOME / 'envs' / env_name / 'bin' / 'pip'
     # Install conda pip packages
     call([str(CONDA_PIP_BIN), 'install'] + conda_pip_packages)
