@@ -6,9 +6,9 @@ from pathlib import Path
 from charmhelpers.fetch.archiveurl import ArchiveUrlFetchHandler
 
 
-CONDA_ENV_NAME = 'jupyter'
+CONDA_ENV_NAME = 'jupyter_env'
 
-CONDA_HOME = Path('/home/ubuntu/anaconda')
+CONDA_HOME = Path('/home/ubuntu/anaconda3')
 CONDA_BIN = CONDA_HOME / 'bin' / 'conda'
 CONDA_PIP_BIN = CONDA_HOME / 'envs' / CONDA_ENV_NAME / 'bin' / 'pip'
 
