@@ -6,7 +6,7 @@ from pathlib import Path
 from charmhelpers.fetch.archiveurl import ArchiveUrlFetchHandler
 
 
-CONDA_HOME = Path('/home/ubuntu/anaconda3')
+CONDA_HOME = Path('/opt/anaconda')
 CONDA_BIN = CONDA_HOME / 'bin' / 'conda'
 
 
