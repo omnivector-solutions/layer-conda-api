@@ -10,7 +10,7 @@ CONDA_HOME = Path('/opt/conda')
 CONDA_BIN = CONDA_HOME / 'bin' / 'conda'
 
 
-def init_install_conda(url, sha, validate):
+def init_install_conda(url, checksum, hash_type):
     """Install conda
 
     Example Usage:
@@ -29,8 +29,8 @@ def init_install_conda(url, sha, validate):
     aufh = ArchiveUrlFetchHandler()
     conda_installer_path = aufh.download_and_validate(
         url,
-        sha,
-        validate
+        checksum,
+        hash_type
     )
     # If CONDA_HOME exists, remove it
     if CONDA_HOME.is_dir():
