@@ -15,14 +15,13 @@ def init_install_conda(url, checksum, hash_type):
 
     Example Usage:
 
-    conda_install_url =
-        "https://repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh"
+    url = "https://repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh"
 
-    sha256 = "7e6785caad25e33930bc03fac4994a434a21bc8401817b7efa28f53619fa9c29"
+    checksum = "7e6785caad25e33930bc03fac4994a434a21bc8401817b7efa28f53619fa9c29"
 
-    validate = "sha256"
+    hash_type = "sha256"
 
-    init_install_conda(conda_install_url, sha256, validate)
+    init_install_conda(url, checksum, hash_type)
     """
 
     # Download and validate conda installer
