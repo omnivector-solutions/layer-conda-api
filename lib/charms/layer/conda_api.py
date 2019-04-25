@@ -1,6 +1,6 @@
 import shutil
 
-from subprocess import call
+from subprocess import check_call
 from pathlib import Path
 
 from charmhelpers.fetch.archiveurl import ArchiveUrlFetchHandler
@@ -37,9 +37,9 @@ def init_install_conda(url, checksum, hash_type):
     # Capabilities
     CONDA_HOME.mkdir(mode=0o777, parents=True)
     # Run conda installer
-    call(['bash', conda_installer_path, '-b', '-f', '-p', str(CONDA_HOME)])
+    check_call(['bash', conda_installer_path, '-b', '-f', '-p', str(CONDA_HOME)])
     # Make sure conda base is up to date
-    call([str(CONDA_BIN), 'update', '-y', '-n', 'base', 'conda'])
+    check_call([str(CONDA_BIN), 'update', '-y', '-n', 'base', 'conda'])
 
 
 def create_conda_venv(env_name, python_version, packages=None):
@@ -54,7 +54,7 @@ def create_conda_venv(env_name, python_version, packages=None):
                          'python={}'.format(python_version)]
     if packages:
         create_conda_venv = create_conda_venv + packages
-    call(create_conda_venv)
+    check_call(create_conda_venv)
 
 
 def remove_conda_venv(env_name):
@@ -66,7 +66,7 @@ def remove_conda_venv(env_name):
     """
     # Remove conda env
     remove_conda_cmd = [str(CONDA_BIN), 'env', 'remove', '-n', env_name, '-y']
-    call(remove_conda_cmd)
+    check_call(remove_conda_cmd)
 
 
 def install_conda_packages(env_name, conda_packages):
@@ -77,7 +77,7 @@ def install_conda_packages(env_name, conda_packages):
     install_conda_packages(['jupyter', 'nb_conda'])
     """
     # Install conda packages
-    call([str(CONDA_BIN), 'install', '-n', env_name, '-y'] + conda_packages)
+    check_call([str(CONDA_BIN), 'install', '-n', env_name, '-y'] + conda_packages)
 
 
 def install_conda_pip_packages(env_name, conda_pip_packages):
@@ -89,4 +89,4 @@ def install_conda_pip_packages(env_name, conda_pip_packages):
     """
     CONDA_PIP_BIN = CONDA_HOME / 'envs' / env_name / 'bin' / 'pip'
     # Install conda pip packages
-    call([str(CONDA_PIP_BIN), 'install'] + conda_pip_packages)
+    check_call([str(CONDA_PIP_BIN), 'install'] + conda_pip_packages)
