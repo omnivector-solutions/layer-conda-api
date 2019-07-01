@@ -10,6 +10,10 @@ CONDA_HOME = Path('/opt/conda')
 CONDA_BIN = CONDA_HOME / 'bin' / 'conda'
 
 
+def conda_pip_bin(env_name):
+    return str(CONDA_HOME / 'envs' / env_name / 'bin' / 'pip')
+
+
 def init_install_conda(url, checksum, hash_type):
     """Install conda
 
@@ -87,6 +91,5 @@ def install_conda_pip_packages(env_name, conda_pip_packages):
 
     conda_install_pip_packages(['findspark'])
     """
-    CONDA_PIP_BIN = CONDA_HOME / 'envs' / env_name / 'bin' / 'pip'
     # Install conda pip packages
-    check_call([str(CONDA_PIP_BIN), 'install'] + conda_pip_packages)
+    check_call([conda_pip_bin(env_name), 'install'] + conda_pip_packages)
